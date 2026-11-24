@@ -207,7 +207,7 @@ src/
 - Listas retornadas pelo controlador e pelo histórico não permitem inclusão ou remoção externa.
 - Botão Sair e fechamento pelo X pedem confirmação antes de descartar a sessão.
 
-## Exemplo de uso de IA no desenvolvimento
+## Uso de IA no desenvolvimento
 
 <details>
 <summary>Consultar dúvidas e soluções</summary>
