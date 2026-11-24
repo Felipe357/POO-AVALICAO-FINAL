@@ -56,6 +56,8 @@ Desenvolvido para a **P2 prática de Programação Orientada a Objetos**, da Fat
 | **Pesquisa rápida** | Localize membros por nome, e-mail ou ID. |
 | **Extrato individual** | Consulte créditos, resgates e saldo com data e hora das operações. |
 | **Indicadores do clube** | Acompanhe a quantidade de membros e os pontos em circulação. |
+| **Situação do saldo** | Identifique quem está sem pontos, acumulando ou já pode resgatar um benefício. |
+| **Prévia do resgate** | Veja quanto falta para o benefício escolhido antes de confirmar a operação. |
 
 ## O sistema em ação
 
@@ -78,6 +80,20 @@ O plano Premium aplica o fator 2x no crédito. No exemplo, 150 pontos-base geram
 Se o saldo não cobrir o benefício, a aplicação informa o motivo em um diálogo e preserva os pontos e o histórico.
 
 ![Mensagem de saldo insuficiente ao tentar resgatar um benefício](docs/imagens/03-saldo-insuficiente.png)
+
+### Cores que ajudam a navegar
+
+Os destaques utilizam recursos padrão do Swing: cores de fundo e texto, bordas e um renderizador de células da `JTable`.
+
+| Cor | Significado |
+| --- | --- |
+| Azul | Ações principais e identificação do plano Essencial. |
+| Verde | Crédito de pontos, operação concluída e saldo que permite resgatar. |
+| Roxo | Plano Premium e ação de resgatar benefício. |
+| Amarelo | Avisos, pontos ainda em acúmulo e saldo insuficiente para o benefício selecionado. |
+| Cinza | Membro sem pontos. |
+
+A situação na tabela considera o benefício de menor custo (café, 100 pontos). A prévia acima das operações considera o benefício selecionado. Os estados aparecem também por escrito, para que a leitura não dependa apenas das cores.
 
 ## Planos e benefícios
 
@@ -270,6 +286,12 @@ for (MembroClube membro : membros) {
     }
 }
 ```
+
+### 6. Melhorias visuais com Swing
+
+**Aluno:** Teria como deixar as telas mais amigáveis, principalmente nas cores dos status, sem fugir dos componentes básicos ensinados em aula?
+
+**IA:** Use uma paleta consistente para diferenciar as ações, destaque o plano e a situação do saldo com um `DefaultTableCellRenderer` e mantenha os textos dos estados visíveis. Um `JLabel` pode mostrar o resultado da última ação e outro pode informar quanto falta para o benefício escolhido. Tudo pode ser feito com Swing padrão, preservando os diálogos de validação com `JOptionPane`.
 
 </details>
 
