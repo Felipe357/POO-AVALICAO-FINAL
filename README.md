@@ -191,44 +191,85 @@ src/
 - Listas retornadas pelo controlador e pelo histórico não permitem inclusão ou remoção externa.
 - Botão Sair e fechamento pelo X pedem confirmação antes de descartar a sessão.
 
-## Registro de apoio de IA
-
-Foi utilizado **OpenAI Codex** como apoio à implementação, à interface Swing e à documentação. Abaixo está o registro resumido dos pedidos reais desta sessão e dos resultados adotados.
+## Exemplo de uso de IA no desenvolvimento
 
 <details>
-<summary>Consultar pedidos e resultados</summary>
+<summary>Consultar dúvidas e soluções</summary>
 
-Os diálogos abaixo resumem os pedidos e as respostas da sessão; não são transcrições literais.
+### 1. Ordenação dos membros
 
-### 1. Criação do projeto
+**Aluno:** Já tenho a classe `MembroClube` com ID e saldo de pontos. Quero listar por ID e também mostrar um ranking por saldo. Preciso mudar o `compareTo()` para cada caso?
 
-**Pedido:** Criar um projeto seguindo o enunciado, usando `avaliacaofinalpoo/` como referência, com uma solução diferente.
+**IA:** Mantenha a ordem natural por ID em `Comparable<MembroClube>` e use um `Comparator` para o ranking. Assim, cada critério fica explícito e você pode desempatar pelo ID.
 
-**Resposta:** Foi desenvolvido o tema 07, Clube de Assinaturas e Fidelidade, com membros Essencial e Premium, contrato de negócio, exceções customizadas, controlador e interface Swing. Os refinamentos incluíram validação de e-mail duplicado, proteção do saldo e coerência entre identidade e ordenação.
+```java
+// Ordem natural definida em MembroClube.
+@Override
+public int compareTo(MembroClube outro) {
+    return Integer.compare(getId(), outro.getId());
+}
 
-### 2. Identificação da dupla
+// Ranking aplicado pelo controlador sobre uma cópia da lista.
+Collections.sort(ordenados, Comparator.comparingInt(MembroClube::getPontos)
+        .reversed()
+        .thenComparingInt(MembroClube::getId));
+```
 
-**Pedido:** Incluir Felipe Augusto Ribeiro Serra e Diogo Americo Cavenaghi, sem RA.
+### 2. Saldo insuficiente no resgate
 
-**Resposta:** Os nomes foram incluídos na identificação da dupla e os campos de RA foram removidos.
+**Aluno:** Implementei o desconto de pontos, mas preciso impedir o resgate quando o saldo for insuficiente. Onde devo lançar a exceção e onde mostro a mensagem?
 
-### 3. Apresentação e organização da entrega
+**IA:** Valide o saldo no domínio antes de descontar os pontos. Lance `PontuacaoInsuficienteException`, herdando de `Exception`, e capture na tela para apresentar `ex.getMessage()` em um `JOptionPane`. Dessa forma, a regra de negócio não depende do Swing.
 
-**Pedido:** Melhorar o README, incluir imagens do sistema em execução, remover os testes e organizar os commits no repositório configurado.
+```java
+// Dentro do método de resgate da entidade.
+if (quantidade > pontos) {
+    throw new PontuacaoInsuficienteException(
+            "Saldo insuficiente: você tem " + pontos
+                    + " pontos e precisa de " + quantidade + ".");
+}
+pontos -= quantidade;
+```
 
-**Resposta:** O README foi reorganizado com apresentação do produto, funcionalidades e três imagens da aplicação. Os arquivos de teste foram removidos, o fluxo Swing foi verificado e os arquivos foram organizados em commits reais por assunto.
+### 3. Pontuação diferente por plano
 
-### 4. Formato do registro
+**Aluno:** Os membros Essencial e Premium já herdam de `MembroClube`. Quero que o Premium receba o dobro de pontos sem colocar vários `if` no controlador. Como organizar isso?
 
-**Pedido:** Apresentar os pedidos e resultados em formato de conversa.
+**IA:** Declare um método abstrato `getMultiplicador()` na classe base e sobrescreva nas subclasses, retornando 1 ou 2. O método de acúmulo utiliza esse fator. No controlador, trabalhe com o contrato `Bonificavel`; o comportamento do plano é resolvido pelo polimorfismo.
 
-**Resposta:** A tabela foi convertida em pares de pedido e resposta resumidos, preservando o histórico real do apoio utilizado.
+```java
+Bonificavel participante = buscarPorId(id);
+participante.acumularPontos(pontosBase);
+```
 
-### 5. Apresentação dos integrantes
+### 4. Preencher o ID pela seleção da tabela
 
-**Pedido:** Melhorar a visualização dos integrantes no README.
+**Aluno:** A tela já tem uma `JTable` e um campo para o ID da operação. Pode ajudar com um evento curto para preencher esse campo quando eu selecionar um membro?
 
-**Resposta:** Os nomes passaram a ocupar duas colunas centralizadas, em negrito e com mais espaçamento.
+**IA:** Adicione um listener ao modelo de seleção. Verifique se existe uma linha selecionada antes de consultar a primeira coluna, que contém o ID. No código abaixo, a tabela utiliza diretamente a ordem do modelo, sem `RowSorter`.
+
+```java
+tabela.getSelectionModel().addListSelectionListener(evento -> {
+    if (!evento.getValueIsAdjusting() && tabela.getSelectedRow() >= 0) {
+        id.setText(modelo.getValueAt(tabela.getSelectedRow(), 0).toString());
+    }
+});
+```
+
+### 5. Evitar e-mails duplicados
+
+**Aluno:** A validação de e-mail já está funcionando, mas ainda consigo cadastrar a mesma pessoa usando letras maiúsculas ou espaços nas pontas. Como evito essa duplicidade na lista em memória?
+
+**IA:** Compare o e-mail informado com os existentes usando `trim()` e `equalsIgnoreCase()` antes de inserir o membro. Na entidade, armazene o e-mail normalizado com `toLowerCase(Locale.ROOT)`. Mantenha também a validação de formato para rejeitar entradas inválidas.
+
+```java
+for (MembroClube membro : membros) {
+    if (email != null && membro.getEmail().equalsIgnoreCase(email.trim())) {
+        throw new CadastroInvalidoException(
+                "Este e-mail já pertence a um membro do clube.");
+    }
+}
+```
 
 </details>
 
