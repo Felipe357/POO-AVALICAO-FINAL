@@ -182,13 +182,31 @@ Foi utilizado **OpenAI Codex** como apoio à implementação, à interface Swing
 <details>
 <summary>Consultar pedidos e resultados</summary>
 
-| Pedido | Resultado adotado |
-| --- | --- |
-| Criar um novo projeto conforme o enunciado, usando `avaliacaofinalpoo/` como referência e produzindo uma solução diferente. | Tema 07, modelo de fidelidade próprio, pacotes de domínio, contrato de negócio, exceções, controlador e tela Swing. |
-| Incluir Felipe Augusto Ribeiro Serra e Diogo Americo Cavenaghi, sem RA. | Identificação da dupla atualizada. |
-| Melhorar a apresentação do README, incluir imagens do sistema, remover os testes e organizar commits no repositório configurado. | Documentação reorganizada, imagens exportadas da aplicação em execução, arquivos de teste removidos e commits reais separados por assunto. |
+Os diálogos abaixo resumem os pedidos e as respostas da sessão; não são transcrições literais.
 
-Os refinamentos incluíram validação de duplicidade, proteção do saldo, coerência entre identidade e ordenação e revisão do fluxo gráfico. O registro descreve o apoio efetivamente utilizado.
+### 1. Criação do projeto
+
+**Pedido:** Criar um projeto seguindo o enunciado, usando `avaliacaofinalpoo/` como referência, com uma solução diferente.
+
+**Resposta:** Foi desenvolvido o tema 07, Clube de Assinaturas e Fidelidade, com membros Essencial e Premium, contrato de negócio, exceções customizadas, controlador e interface Swing. Os refinamentos incluíram validação de e-mail duplicado, proteção do saldo e coerência entre identidade e ordenação.
+
+### 2. Identificação da dupla
+
+**Pedido:** Incluir Felipe Augusto Ribeiro Serra e Diogo Americo Cavenaghi, sem RA.
+
+**Resposta:** Os nomes foram incluídos na identificação da dupla e os campos de RA foram removidos.
+
+### 3. Apresentação e organização da entrega
+
+**Pedido:** Melhorar o README, incluir imagens do sistema em execução, remover os testes e organizar os commits no repositório configurado.
+
+**Resposta:** O README foi reorganizado com apresentação do produto, funcionalidades e três imagens da aplicação. Os arquivos de teste foram removidos, o fluxo Swing foi verificado e os arquivos foram organizados em commits reais por assunto.
+
+### 4. Formato do registro
+
+**Pedido:** Apresentar os pedidos e resultados em formato de conversa.
+
+**Resposta:** A tabela foi convertida em pares de pedido e resposta resumidos, preservando o histórico real do apoio utilizado.
 
 </details>
 
