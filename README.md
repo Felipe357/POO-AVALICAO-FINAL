@@ -24,10 +24,26 @@ O Clube Vantagens reúne em uma única janela o ciclo de um programa de fidelida
 
 Desenvolvido para a **P2 prática de Programação Orientada a Objetos**, da Fatec Mogi Mirim, com o Prof. Mestre Marcos Roberto de Moraes (Maromo). **Tema 07 — Clube de Assinaturas e Fidelidade**, com base no enunciado da atividade e nos tópicos POO_07 a POO_10.
 
-| Integrantes |
-| --- |
-| Felipe Augusto Ribeiro Serra |
-| Diogo Americo Cavenaghi |
+<div align="center">
+
+<h3>Integrantes</h3>
+
+<table>
+  <tr>
+    <td align="center" width="360">
+      <br>
+      <strong>Felipe Augusto Ribeiro Serra</strong>
+      <br><br>
+    </td>
+    <td align="center" width="360">
+      <br>
+      <strong>Diogo Americo Cavenaghi</strong>
+      <br><br>
+    </td>
+  </tr>
+</table>
+
+</div>
 
 ## O que você pode fazer
 
@@ -207,6 +223,12 @@ Os diálogos abaixo resumem os pedidos e as respostas da sessão; não são tran
 **Pedido:** Apresentar os pedidos e resultados em formato de conversa.
 
 **Resposta:** A tabela foi convertida em pares de pedido e resposta resumidos, preservando o histórico real do apoio utilizado.
+
+### 5. Apresentação dos integrantes
+
+**Pedido:** Melhorar a visualização dos integrantes no README.
+
+**Resposta:** Os nomes passaram a ocupar duas colunas centralizadas, em negrito e com mais espaçamento.
 
 </details>
 
